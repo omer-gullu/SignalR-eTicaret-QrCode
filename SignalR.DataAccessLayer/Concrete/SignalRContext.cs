@@ -12,7 +12,7 @@ namespace SignalR.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-8AVNO4L\\SQLEXPRESS;Database=SignalRDb;Trusted_Connection=True;TrustServerCertificate=True");
+           optionsBuilder.UseSqlServer("Server=DESKTOP-8AVNO4L\\SQLEXPRESS;Database=SignalRDb;Trusted_Connection=True;TrustServerCertificate=True");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Booking> Bookings { get; set; }
