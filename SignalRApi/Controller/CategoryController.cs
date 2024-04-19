@@ -25,6 +25,11 @@ namespace SignalRApi.Controller
             var value = _categoryService.TGetListAll();
             return Ok(value);
         }
+        [HttpPost]
+        public IActionResult CreateCategory()
+        {
+            return Ok();
+        }
 
     }
 }

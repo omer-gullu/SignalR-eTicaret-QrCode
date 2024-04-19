@@ -65,5 +65,6 @@ namespace SignalRApi.Controller
             var value = _bookingService.TGetByID(id);
             return Ok(value);
         }
+       
     }
 }
