@@ -42,5 +42,6 @@ namespace SignalR.BusinessLayer.Concrete
         {
             _bookingDal.Update(entity);
         }
+        
     }
 }
