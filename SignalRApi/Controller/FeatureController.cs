@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.FeatureDto;
@@ -60,7 +61,7 @@ namespace SignalRApi.Controller
             };
             return Ok("Özellik bilgisi güncellendi");
         }
-        [HttpGet]
+        [HttpGet("GetFeature")]
         public IActionResult GetFeature(int id)
         {
             var value = _featureService.TGetByID(id);

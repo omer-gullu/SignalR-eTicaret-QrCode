@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.TestimonialDto;
@@ -58,7 +59,7 @@ namespace SignalRApi.Controller
             _testimonialService.TDelete(value);
             return Ok("Referans alanı silindi");
         }
-        [HttpGet]
+        [HttpGet("GetTestimonial")]
         public IActionResult GetTestimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);

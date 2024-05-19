@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.SocialMediaDto;
@@ -54,7 +55,7 @@ namespace SignalRApi.Controller
             _socialMediaService.TDelete(value);
             return Ok("Sosyal medya silindi");
         }
-        [HttpGet]
+        [HttpGet("GetSocialMedia")]
         public IActionResult GetSocialMedia(int id)
         {
             var value = _socialMediaService.TGetByID(id);
