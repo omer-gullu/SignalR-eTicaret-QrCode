@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.CategoryDto;
+using SignalR.EntityLayer.Entities;
 
 namespace SignalRApi.Controller
 {
@@ -12,8 +13,6 @@ namespace SignalRApi.Controller
     {
         private readonly ICategoryService _categoryService;
       
-
-
         public CategoryController(ICategoryService categoryService) 
         {
             _categoryService = categoryService;
@@ -26,10 +25,40 @@ namespace SignalRApi.Controller
             return Ok(value);
         }
         [HttpPost]
-        public IActionResult CreateCategory()
+        public IActionResult CreateCategory(CreateCategoryDto createCategoryDto)
         {
-            return Ok();
+            Category category = new Category()
+            {
+                CategoryName = createCategoryDto.CategoryName,
+                Status = true
+            };
+            _categoryService.TAdd(category);
+            return Ok("Yeni Kategori Eklendi");
         }
-
+        [HttpDelete]
+        public IActionResult DeleteCategory(int id)
+        {
+            var value = _categoryService.TGetByID(id);
+            _categoryService.TDelete(value);
+            return Ok("Kategori kısmı silindi");
+        }
+        [HttpPut]
+        public IActionResult UpdateCategory(UpdateCategoryDto updateCategoryDto)
+        {
+            Category category = new Category()
+            {
+                CategoryID = updateCategoryDto.CategoryID,
+                CategoryName = updateCategoryDto.CategoryName,
+                Status = true
+            };
+            _categoryService.TUpdate(category);
+            return Ok("Kategori Kısmı Güncellendi");
+        }
+        [HttpGet("GetCategory")]
+        public IActionResult GetCategory(int id)
+        {
+            var value = _categoryService.TGetByID(id);
+            return Ok(value);
+        }
     }
 }

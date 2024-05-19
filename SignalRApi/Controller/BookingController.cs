@@ -57,7 +57,7 @@ namespace SignalRApi.Controller
                 BookingID = updateBookingDto.BookingID
             };
             _bookingService.TUpdate(booking);
-            return Ok("Rezervasyongüncellendi");
+            return Ok("Rezervasyon güncellendi");
         }
         [HttpGet("GetBooking")]
         public IActionResult GetBooking(int id)

@@ -19,7 +19,7 @@ namespace SignalRApi.Controller
         }
 
         [HttpGet]
-        public IActionResult AboutLİst()
+        public IActionResult AboutList()
         {
             var values = _aboutService.TGetListAll();
             return Ok(values);
@@ -34,7 +34,7 @@ namespace SignalRApi.Controller
                 ImageUrl = createAboutDto.ImageUrl
             };
             _aboutService.TAdd(about);
-            return Ok("Hakkımda kısmı başarılı şekilde eklendi");
+            return Ok("Hakkımda kısmı eklendi");
         }
         [HttpDelete]
         public IActionResult DeleteAbout(int id)
