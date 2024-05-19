@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.DiscountDto;
@@ -30,7 +31,7 @@ namespace SignalRApi.Controller
                 Amount = createDiscountDto.Amount,
                 Description = createDiscountDto.Description,
                 ImageUrl = createDiscountDto.ImageUrl,
-                Title = createDiscountDto.Title
+                Title = createDiscountDto.Title,
             };
             _discountService.TAdd(discount);
             return Ok("İndirim bilgisi eklendi");
@@ -56,7 +57,7 @@ namespace SignalRApi.Controller
             _discountService.TUpdate(discount);
             return Ok("İndirim bilgisi güncellendi");
         }
-        [HttpGet]
+        [HttpGet("GetDiscount")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);

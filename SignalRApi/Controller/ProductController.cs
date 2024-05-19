@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ProductDto;
@@ -58,7 +59,7 @@ namespace SignalRApi.Controller
             _productService.TUpdate(product);
             return Ok("Ürün güncellendi");
         }
-        [HttpGet]
+        [HttpGet("GetProduct")]
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetByID(id);
