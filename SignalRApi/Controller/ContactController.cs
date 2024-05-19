@@ -48,6 +48,7 @@ namespace SignalRApi.Controller
         {
             Contact contact = new Contact()
             {
+                ContactID = updateContactDto.ContactID,
                 Phone = updateContactDto.Phone,
                 Mail = updateContactDto.Mail,
                 Location = updateContactDto.Location,

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.ProductDto;
+using SignalR.EntityLayer.Entities;
 
 namespace SignalRApi.Controller
 {
@@ -18,27 +19,50 @@ namespace SignalRApi.Controller
         [HttpGet]
         public IActionResult ProductList()
         {
-            return Ok();
+            var value = _productService.TGetListAll();
+            return Ok(value);
         }
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
         {
-            return Ok();
+            Product product = new Product()
+            {
+                ProductName = createProductDto.ProductName,
+                Description = createProductDto.Description,
+                ImageUrl = createProductDto.ImageUrl,
+                Price = createProductDto.Price,
+                ProductStatus = true
+            };
+            _productService.TAdd(product);
+            return Ok("Ürün eklendi");
         }
         [HttpDelete]
         public IActionResult DeleteProduct(int id)
         {
-            return Ok();
+            var value = _productService.TGetByID(id);
+            _productService.TDelete(value);
+            return Ok("Ürün silindi");
         }
         [HttpPut]
         public IActionResult UpdateProduct(UpdateProductDto updateProductDto)
         {
-            return Ok();
+            Product product = new Product()
+            {
+                ProductID = updateProductDto.ProductID,
+                ProductName = updateProductDto.ProductName,
+                Description = updateProductDto.Description,
+                ImageUrl = updateProductDto.ImageUrl,
+                Price = updateProductDto.Price,
+                ProductStatus = true
+            };
+            _productService.TUpdate(product);
+            return Ok("Ürün güncellendi");
         }
         [HttpGet]
         public IActionResult GetProduct(int id)
         {
-            return Ok();
+            var value = _productService.TGetByID(id);
+            return Ok(value);
         }
     }
 }

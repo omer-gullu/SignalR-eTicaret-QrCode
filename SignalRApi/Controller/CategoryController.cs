@@ -13,8 +13,6 @@ namespace SignalRApi.Controller
     {
         private readonly ICategoryService _categoryService;
       
-
-
         public CategoryController(ICategoryService categoryService) 
         {
             _categoryService = categoryService;
@@ -49,6 +47,7 @@ namespace SignalRApi.Controller
         {
             Category category = new Category()
             {
+                CategoryID = updateCategoryDto.CategoryID,
                 CategoryName = updateCategoryDto.CategoryName,
                 Status = true
             };

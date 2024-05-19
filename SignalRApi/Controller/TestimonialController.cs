@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.TestimonialDto;
+using SignalR.EntityLayer.Entities;
 
 namespace SignalRApi.Controller
 {
@@ -18,27 +19,50 @@ namespace SignalRApi.Controller
         [HttpGet]
         public IActionResult TestimonialList()
         {
-            return Ok();
+            var value = _testimonialService.TGetListAll();
+            return Ok(value);
         }
         [HttpPost]
         public IActionResult CreateTestimonial(CreateTestimonialDto createTestimonialDto)
         {
-            return Ok();
+            Testimonial testimonial = new Testimonial()
+            {
+                Name = createTestimonialDto.Name,
+                Comment = createTestimonialDto.Comment,
+                ImageUrl = createTestimonialDto.ImageUrl,
+                Status = true,
+                Title = createTestimonialDto.Title
+            };
+            _testimonialService.TAdd(testimonial);
+            return Ok("Referans alanı eklendi");
         }
         [HttpPut]
         public IActionResult UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
         {
-            return Ok();
+            Testimonial testimonial = new Testimonial()
+            {
+                Name = updateTestimonialDto.Name,
+                Comment = updateTestimonialDto.Comment,
+                ImageUrl = updateTestimonialDto.ImageUrl,
+                Status = true,
+                Title = updateTestimonialDto.Title,
+                TestimonialID = updateTestimonialDto.TestimonialID
+            };
+            _testimonialService.TUpdate(testimonial);
+            return Ok("Referans alanı güncellendi");
         }
         [HttpDelete]
         public IActionResult DeleteTestimonial(int id)
         {
-            return Ok();
+            var value = _testimonialService.TGetByID(id);
+            _testimonialService.TDelete(value);
+            return Ok("Referans alanı silindi");
         }
         [HttpGet]
         public IActionResult GetTestimonial(int id)
         {
-            return Ok();
+            var value = _testimonialService.TGetByID(id);
+            return Ok(value);
         }
     }
 }
