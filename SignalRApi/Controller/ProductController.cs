@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SignalR.BusinessLayer.Abstract;
+using SignalR.DataAccessLayer.Concrete;
 using SignalR.DtoLayer.ProductDto;
 using SignalR.EntityLayer.Entities;
 
@@ -12,16 +15,40 @@ namespace SignalRApi.Controller
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
-        }
-        [HttpGet]
+			_mapper = mapper;
+		}
+
+	
+
+		[HttpGet]
         public IActionResult ProductList()
         {
             var value = _productService.TGetListAll();
             return Ok(value);
+        }
+
+        [HttpGet("ProductListWithCategory")]
+        public IActionResult ProductListWithCategory()
+        {
+			var context = new SignalRContext();
+			var values = context.Products.Include(t => t.Category).Select(y => new ResultProductWithCategory
+			{
+				Description = y.Description,
+				ImageUrl = y.ImageUrl,
+				Price = y.Price,
+				ProductID = y.ProductID,
+				ProductName = y.ProductName,
+				ProductStatus = y.ProductStatus,
+				CategoryName = y.Category.CategoryName
+			});
+			
+			return Ok(values.ToList());
+            
         }
         [HttpPost]
         public IActionResult CreateProduct(CreateProductDto createProductDto)
@@ -35,7 +62,7 @@ namespace SignalRApi.Controller
                 ProductStatus = true
             };
             _productService.TAdd(product);
-            return Ok("Ürün eklendi");
+            return Ok("Ürün eklendii");
         }
         [HttpDelete]
         public IActionResult DeleteProduct(int id)

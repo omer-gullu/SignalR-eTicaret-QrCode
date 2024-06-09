@@ -8,6 +8,8 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 builder.Services.AddDbContext<SignalRContext>();
 
 
