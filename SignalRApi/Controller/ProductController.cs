@@ -62,7 +62,7 @@ namespace SignalRApi.Controller
                 ProductStatus = true
             };
             _productService.TAdd(product);
-            return Ok("Ürün eklendi");
+            return Ok("Ürün eklendii");
         }
         [HttpDelete]
         public IActionResult DeleteProduct(int id)
